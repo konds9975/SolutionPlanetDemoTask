@@ -1,0 +1,6 @@
+framework module Pods_SolutionPlanetDemoTaskTests {
+  umbrella header "Pods-SolutionPlanetDemoTaskTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
