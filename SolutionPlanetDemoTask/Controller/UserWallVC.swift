@@ -11,6 +11,19 @@ import AVKit
 import AVFoundation
 class UserWallVC: UIViewController {
 
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+           self.myWallTableView.reloadData()
+        } else {
+            print("Portrait")
+            self.myWallTableView.reloadData()
+        }
+    }
+    
+    
     var isNewDataLoading = true
     
     func loadJsonFromBundel()
@@ -206,9 +219,12 @@ extension UserWallVC : UITableViewDataSource,UITableViewDelegate
         
         if let imaheView = sender.view as? UIImageView
         {
-            vc.passImage = imaheView.image
-            vc.modalPresentationStyle = .overCurrentContext
-            self.present(vc, animated: true, completion: nil)
+            if imaheView.image != nil
+            {
+                vc.passImage = imaheView.image
+                vc.modalPresentationStyle = .overCurrentContext
+                self.present(vc, animated: true, completion: nil)
+            }
         }
   
     }
@@ -220,9 +236,12 @@ extension UserWallVC : UITableViewDataSource,UITableViewDelegate
        
         if let imaheView = sender.view as? UIImageView
         {
-            vc.passImage = imaheView.image
-            vc.modalPresentationStyle = .overCurrentContext
-            self.present(vc, animated: true, completion: nil)
+            if imaheView.image != nil
+            {
+                vc.passImage = imaheView.image
+                vc.modalPresentationStyle = .overCurrentContext
+                self.present(vc, animated: true, completion: nil)
+            }
         }
         
        
@@ -242,9 +261,12 @@ extension UserWallVC : UITableViewDataSource,UITableViewDelegate
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ImageVeiwerVC") as! ImageVeiwerVC
         if let imaheView = sender.view as? UIImageView
         {
-            vc.passImage = imaheView.image
-            vc.modalPresentationStyle = .overCurrentContext
-            self.present(vc, animated: true, completion: nil)
+            if imaheView.image != nil
+            {
+                vc.passImage = imaheView.image
+                vc.modalPresentationStyle = .overCurrentContext
+                self.present(vc, animated: true, completion: nil)
+            }
         }
         
         
@@ -256,9 +278,12 @@ extension UserWallVC : UITableViewDataSource,UITableViewDelegate
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ImageVeiwerVC") as! ImageVeiwerVC
          if let imaheView = sender.view as? UIImageView
             {
-                vc.passImage = imaheView.image
-                vc.modalPresentationStyle = .overCurrentContext
-                self.present(vc, animated: true, completion: nil)
+                if imaheView.image != nil
+                {
+                    vc.passImage = imaheView.image
+                    vc.modalPresentationStyle = .overCurrentContext
+                    self.present(vc, animated: true, completion: nil)
+                }
             }
         
         
@@ -294,17 +319,23 @@ extension UserWallVC : UITableViewDataSource,UITableViewDelegate
         {
             if let imaheView = sender.view as? UIImageView
             {
-                vc.passImage = imaheView.image
-                vc.modalPresentationStyle = .overCurrentContext
-                self.present(vc, animated: true, completion: nil)
+                if imaheView.image != nil
+                {
+                    vc.passImage = imaheView.image
+                    vc.modalPresentationStyle = .overCurrentContext
+                    self.present(vc, animated: true, completion: nil)
+                }
             }
         
         }
         else
         {
-            vc.model = model
-            vc.modalPresentationStyle = .overCurrentContext
-            self.present(vc, animated: true, completion: nil)
+            if  ((model.postImageUrlArray?.count)!) != 0
+            {
+                vc.model = model
+                vc.modalPresentationStyle = .overCurrentContext
+                self.present(vc, animated: true, completion: nil)
+            }
         }
         
         
